@@ -60,6 +60,15 @@ suites:
             -Xms4g: nil
             -Xmx384m: ''
             -Xms64m: ''
+        yggdrasil:
+          enabled: true
+          host: 'localhost'
+          port: '9797'
+          api_version: 'v2'
+          token: 'TOKENRANDOM'
+          namespace: 'zookeeper_service'
+          overrides: 'none'
+          configure_etc_hosts: false
         burrow:
           zookeeper_clusters: ['localhost']
           kafka_cluster: 
