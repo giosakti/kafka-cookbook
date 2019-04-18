@@ -1,6 +1,11 @@
 ---
 driver:
   name: vagrant
+  provision: true
+  vagrantfiles:
+    - Vagrantfile.rb
+  synced_folders:
+    - ["config", "/config"]
 
 provisioner:
   name: chef_zero
