@@ -1,5 +1,6 @@
 stages:
   - validate
+  - test
   - build-base
 
 variables:
@@ -10,7 +11,7 @@ variables:
   COOKBOOK_PATHS: "./cookbooks"
 
 before_script:
-    - curl -s https://raw.githubusercontent.com/BaritoLog/cx-scripts/master/gitlabci-install-packer.sh | bash
+  - curl -s https://raw.githubusercontent.com/BaritoLog/cx-scripts/master/gitlabci-install-packer.sh | bash
 
 validate:
   stage: validate
@@ -29,4 +30,4 @@ build-base:
     - lxd
     - lxc
   only:
-  - tags
+    - tags
