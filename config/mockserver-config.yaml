@@ -4,7 +4,7 @@ configs:
       {
         "success": true,
         "data": {
-          "zookeeper_hosts": "[{\"hostname\":\"zookeeper-01-ubuntu-1804.vagrantup.com\",\"ip\":\"0.0.0.0\"},{\"hostname\":\"zookeeper-02-ubuntu-1804.vagrantup.com\",\"ip\":\"0.0.0.0\"}]"
+          "zookeeper_hosts": "[{\"hostname\":\"default-opscode-ubuntu-1804-chef-14\",\"ip\":\"0.0.0.0\"}]"
         }
       }
     contentType: application/json
