@@ -12,8 +12,9 @@ return if node[cookbook_name]['zookeeper']['hosts'].empty?
 # Keep it simple for now
 node.run_state[cookbook_name] ||= {}
 node.run_state[cookbook_name]['zookeeper'] ||= {}
+node.run_state[cookbook_name]['zookeeper']['hosts'] = node[cookbook_name]['zookeeper']['hosts']
 
-# Fetch hosts from yggdrasil, if enabled
+# Override zookeeper hosts from yggdrasil, if enabled
 if node[cookbook_name]['yggdrasil']['enabled']
   yggdrasil_host = node[cookbook_name]['yggdrasil']['host']
   yggdrasil_port = node[cookbook_name]['yggdrasil']['port']
@@ -28,9 +29,4 @@ if node[cookbook_name]['yggdrasil']['enabled']
   config = JSON.parse(yggdrasil_config["zookeeper_hosts"])
   node.run_state[cookbook_name]['zookeeper']['hosts'] ||= {}
   node.run_state[cookbook_name]['zookeeper']['hosts'] = config
-elsif !node[cookbook_name]['zookeeper']['hosts'].empty?
-  node.run_state[cookbook_name]['zookeeper']['hosts'] = node[cookbook_name]['zookeeper']['hosts']
-else
-  # Don't continue if no hosts are supplied
-  return
 end
