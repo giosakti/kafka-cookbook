@@ -49,6 +49,11 @@ describe systemd_service('kafka') do
   it { should be_running }
 end
 
+# Check if kafka is connected with zookeeper
+describe command('zookeeper-shell localhost:2181 <<< "ls /kafka-cluster/brokers/ids"') do
+  its('stdout') { should match /1001|\[\]/ }
+end
+
 describe directory('/opt/burrow') do
   its('mode') { should cmp '0755' }
   its('owner') { should eq 'burrow' }
