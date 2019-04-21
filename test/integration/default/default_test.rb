@@ -50,8 +50,11 @@ describe systemd_service('kafka') do
 end
 
 # Check if kafka is connected with zookeeper
-describe command('zookeeper-shell localhost:2181 <<< "ls /kafka-cluster/brokers/ids"') do
-  its('stdout') { should match /1001|\[\]/ }
+# NOTE: Might be irrelevant
+describe 'Connection kafka - zookeeper' do
+  it 'should be connected' do
+    expect(command('zookeeper-shell localhost:2181 <<< "ls /kafka-cluster/brokers/ids"').stdout).to match /1001|\[\]/
+  end
 end
 
 describe directory('/opt/burrow') do
