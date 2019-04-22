@@ -1,9 +1,9 @@
 class Yggdrasil
-  def initialize(host,port,api_version,token)
-      @host = host
-      @port = port
-      @api_version = api_version
-      @token = token
+  def initialize(params = {})
+      @host = params['host']
+      @port = params['port']
+      @api_version = params['api_version']
+      @token = params['token']
   end
 
   def fetch_configs(namespace, overrides)
