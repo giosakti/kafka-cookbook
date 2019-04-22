@@ -68,7 +68,7 @@ suites:
           token: 'TOKENRANDOM'
           namespace: 'zookeeper_service'
           overrides: 'none'
-          configure_etc_hosts: false
+          configure_etc_hosts: true
         burrow:
           zookeeper_clusters: ['localhost']
           kafka_cluster: 
