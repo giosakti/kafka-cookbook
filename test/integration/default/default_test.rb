@@ -78,6 +78,9 @@ describe file('/opt/burrow/config/burrow.toml') do
   its('mode') { should cmp '0644' }
   its('owner') { should eq 'burrow' }
   its('group') { should eq 'burrow' }
+
+  # Should check if yggdrasil configs are persisted
+  its('content') { should match /servers=\["default-opscode-ubuntu-1804-chef-14:2181"\]/ }
 end
 
 describe systemd_service('burrow') do
