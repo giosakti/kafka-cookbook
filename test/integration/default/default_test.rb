@@ -5,6 +5,8 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
+require 'rspec/retry'
+
 unless os.windows?
   describe group('kafka') do
     it { should exist }
@@ -50,7 +52,6 @@ describe systemd_service('kafka') do
 end
 
 # Check if kafka is connected with zookeeper
-# NOTE: Might be irrelevant
 describe 'Connection kafka - zookeeper' do
   it 'should be connected' do
     expect(command('zookeeper-shell localhost:2181 <<< "ls /kafka-cluster/brokers/ids"').stdout).to match /1001|\[\]/
@@ -78,5 +79,9 @@ end
 describe systemd_service('burrow') do
   it { should be_installed }
   it { should be_enabled }
-  it { should be_running }
+
+  # Test is replaced because the test before only checks before the block starts
+  it 'should be running', retry: 3, retry_wait: 10 do
+    expect(command("systemctl is-active burrow --quiet").exit_status).to eq 0
+  end
 end
