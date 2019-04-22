@@ -19,17 +19,17 @@ zookeeper_cluster = node.run_state.dig(cookbook_name, 'zookeeper')
 return if zookeeper_cluster.nil?
 
 # Get zookeeper hosts
-host_map = -> (host) { "#{host}:2181" }
+host_map = -> (host) { host + ":2181" }
 
 # Change mapping function when yggdrasil is enabled
 if node[cookbook_name]['yggdrasil']['enabled']
-  host_map = -> (host) { "#{host['hostname']}:2181" }
+  host_map = -> (host) { host['hostname'] + ":2181" }
 
   # Add hostname to /etc/hosts if requested
   if node[cookbook_name]['yggdrasil']['configure_etc_hosts']
-    zookeeper_cluster.each do |v|
-      hostsfile_entry "#{v['ip']}" do
-        hostname  "#{v['hostname']}"
+    zookeeper_cluster['hosts'].each do |v|
+      hostsfile_entry v['ip'] do
+        hostname  v['hostname']
         action    :create
       end
     end
