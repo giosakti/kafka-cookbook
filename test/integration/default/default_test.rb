@@ -58,6 +58,10 @@ describe 'Connection kafka - zookeeper' do
   end
 end
 
+describe file('/etc/hosts') do
+  its('content') { should match /0.0.0.0\s+default-opscode-ubuntu-1804-chef-14/ }
+end
+
 describe directory('/opt/burrow') do
   its('mode') { should cmp '0755' }
   its('owner') { should eq 'burrow' }
