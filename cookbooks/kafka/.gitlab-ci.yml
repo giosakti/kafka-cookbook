@@ -1,6 +1,5 @@
 stages:
   - validate
-  - test
   - build-base
 
 variables:
