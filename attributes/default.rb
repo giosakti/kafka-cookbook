@@ -50,6 +50,7 @@ default[cookbook_name]['kafka']['zk_chroot'] =
 # Kafka configuration, default provided by Kafka project
 default[cookbook_name]['kafka']['port'] = 9092
 default[cookbook_name]['kafka']['max_replication_factor'] = 3
+default[cookbook_name]['kafka']['min_insync_replicas'] = 2
 default[cookbook_name]['kafka']['config'] = {
   'advertised.listeners' => "PLAINTEXT://#{node['ipaddress']}:#{node[cookbook_name]['kafka']['port']}",
   'broker.id' => -1,
