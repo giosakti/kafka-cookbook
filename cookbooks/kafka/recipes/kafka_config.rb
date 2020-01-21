@@ -47,8 +47,10 @@ config['zookeeper.connect'] = zk_connection
 kafka_hosts_count = node[cookbook_name]['kafka']['hosts_count']
 if kafka_hosts_count < 3
   config['offsets.topic.replication.factor'] = kafka_hosts_count
+  config['min.insync.replicas'] = 1
 else
   config['offsets.topic.replication.factor'] = node[cookbook_name]['kafka']['max_replication_factor']
+  config['min.insync.replicas'] = 2
 end
 
 # Write configurations
