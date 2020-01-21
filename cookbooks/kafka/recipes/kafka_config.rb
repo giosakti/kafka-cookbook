@@ -50,7 +50,7 @@ if kafka_hosts_count < 3
   config['min.insync.replicas'] = 1
 else
   config['offsets.topic.replication.factor'] = node[cookbook_name]['kafka']['max_replication_factor']
-  config['min.insync.replicas'] = 2
+  config['min.insync.replicas'] = node[cookbook_name]['kafka']['min_insync_replicas']
 end
 
 # Write configurations
