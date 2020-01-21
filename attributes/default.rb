@@ -49,8 +49,6 @@ default[cookbook_name]['kafka']['zk_chroot'] =
 
 # Kafka configuration, default provided by Kafka project
 default[cookbook_name]['kafka']['port'] = 9092
-default[cookbook_name]['kafka']['max_replication_factor'] = 3
-default[cookbook_name]['kafka']['min_insync_replicas'] = 2
 default[cookbook_name]['kafka']['config'] = {
   'advertised.listeners' => "PLAINTEXT://#{node['ipaddress']}:#{node[cookbook_name]['kafka']['port']}",
   'broker.id' => -1,
@@ -59,11 +57,12 @@ default[cookbook_name]['kafka']['config'] = {
   'log.retention.check.interval.ms' => 300_000,
   'log.retention.hours' => 168,
   'log.segment.bytes' => 1_073_741_824,
-  'min.insync.replicas' => 1,
+  'min.insync.replicas' => 2,
   'num.io.threads' => 8,
   'num.network.threads' => 3,
   'num.partitions' => 1,
   'num.recovery.threads.per.data.dir' => 1,
+  'offsets.topic.replication.factor' => 3,
   'port' => node[cookbook_name]['kafka']['port'],
   'socket.receive.buffer.bytes' => 102_400,
   'socket.request.max.bytes' => 104_857_600,
